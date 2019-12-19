@@ -1,6 +1,4 @@
 
-Exercise 4. Using a Debugger 
-
 Exercise 4. Using a Debugger
 ----------------------------
 
