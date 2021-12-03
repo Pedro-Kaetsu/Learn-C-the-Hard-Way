@@ -4,8 +4,8 @@
 #include <usuario.h>
 #include <agenda.h>
 
-int opt, id2;
-contato contcad;
+int opt, id1, id2, i;
+contato contcad, contcons;
 FILE * agenda_arq;
 
 void menu_agenda(usuario usuario)
@@ -27,8 +27,18 @@ void menu_agenda(usuario usuario)
 	            break;
 
 	        case 2:
-                //alterar_contato();
+                printf("\n\nDigite o ID do contato a ser alterado:\n");
+                scanf("%d",&id1);
+                alterar_contato(id1);
 	            break;
+            
+            case 3:
+                listar_contatos(usuario.id);
+                break;
+            
+            case 4:
+                consultar_contatos(usuario.id);
+                break;
             
 	    }
     }
@@ -59,16 +69,45 @@ void cadastrar_contato(int idusr)
 
 }
 
-void alterar_contato(int)
+void alterar_contato(int id)
 {
 
 }
 
-void listar_contatos(int)
+void listar_contatos(int id)
 {
-
+    agenda_arq = fopen(ARQ_AGENDA, "rb");
+    fseek(agenda_arq,1,SEEK_SET);
+    printf("\nID\tNome\tTelefone\tE-mail\n\n");
+    while (( i = feof(agenda_arq)) != 1 )
+    {
+        fread(&contcons,sizeof(usuario),1, agenda_arq);
+        if (contcons.id_usuario == id)
+        {
+            printf("%d\t%s\t%s\t%s\n", contcons.id_contato, contcons.nome, contcons.telefone, contcons.email);
+        }
+    }
+    printf("\n");
+    fclose(agenda_arq);
 }
-void consultar_contatos(int)
+
+void consultar_contatos(int id)
 {
+    char pesquisa[20];
+    printf("Pesquisar por nome:\n");
+    scanf("%s",&pesquisa);
+    agenda_arq = fopen(ARQ_AGENDA, "rb");
+    fseek(agenda_arq,1,SEEK_SET);
+    printf("\nID\tNome\tTelefone\tE-mail\n\n");
+    while (( i = feof(agenda_arq)) != 1 )
+    {
+        fread(&contcons,sizeof(usuario),1, agenda_arq);
+        if (contcons.id_usuario == id && (strchr(contcons.nome, *pesquisa) != NULL))
+        {
+            printf("%d\t%s\t%s\t%s\n", contcons.id_contato, contcons.nome, contcons.telefone, contcons.email);
+        }
+    }
+    printf("\n");
+    fclose(agenda_arq);
 
 }
