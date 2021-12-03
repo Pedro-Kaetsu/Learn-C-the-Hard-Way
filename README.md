@@ -1,7 +1,8 @@
 # A repository for projects in C lang
 
-- Book "Learn C the Hard Way"
+- "Learn C the Hard Way" Book 
   - Annotations &amp; Exercises
 - Multi User Agenda
+  - Learning Project   
   - Login Authentication
   - Saves on binary files
